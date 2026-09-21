@@ -214,7 +214,7 @@ private:
    * @param[in] system_time_stamp システム時刻
    * @return 補正後タイムスタンプ
    */
-  rclcpp::Time get_synchronized_time(long time_stamp, rclcpp::Time system_time_stamp);
+  rclcpp::Time get_synchronized_time(int32_t time_stamp, rclcpp::Time system_time_stamp);
 
   /**
    * @brief 強度モード対応確認
@@ -373,7 +373,7 @@ private:
   /** 同期モード用変数 */
   double hardware_clock_;
   /** 同期モード用変数 */
-  long int last_hardware_time_stamp_;
+  int32_t last_hardware_time_stamp_;
   /** 同期モード用変数 */
   double hardware_clock_adj_;
   /** 同期モード用変数 */
@@ -387,7 +387,7 @@ private:
   int last_step_;
 
   /** スキャンデータ受信領域 */
-  std::vector<long> distance_;
+  std::vector<int32_t> distance_;
   /** 強度データ受信領域 */
   std::vector<unsigned short> intensity_;
 

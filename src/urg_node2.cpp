@@ -382,8 +382,8 @@ void UrgNode2::set_scan_parameter()
       &urg_,
       min_step)) / (2.0 * M_PI)) * scan_period_ / static_cast<double>(max_step - min_step);
 
-  long min_dis;
-  long max_dis;
+  int32_t min_dis;
+  int32_t max_dis;
   urg_distance_min_max(&urg_, &min_dis, &max_dis);
   topic_range_min_ = static_cast<double>(min_dis) / 1000.0;
   topic_range_max_ = static_cast<double>(max_dis) / 1000.0;
@@ -542,7 +542,7 @@ bool UrgNode2::create_scan_message(sensor_msgs::msg::LaserScan & msg)
   msg.range_max = topic_range_max_;
 
   int num_beams = 0;
-  long time_stamp = 0;
+  int32_t time_stamp = 0;
   rclcpp::Clock system_clock(RCL_SYSTEM_TIME);
   rclcpp::Time system_time_stamp = system_clock.now();
 
@@ -596,7 +596,7 @@ bool UrgNode2::create_scan_message(sensor_msgs::msg::MultiEchoLaserScan & msg)
   msg.range_max = topic_range_max_;
 
   int num_beams = 0;
-  long time_stamp = 0;
+  int32_t time_stamp = 0;
   rclcpp::Clock system_clock(RCL_SYSTEM_TIME);
   rclcpp::Time system_time_stamp = system_clock.now();
   if (use_intensity_) {
@@ -931,10 +931,10 @@ rclcpp::Duration UrgNode2::get_time_stamp_offset(size_t num_measurements)
 
   std::vector<rclcpp::Duration> time_offsets;
   for (size_t i = 0; i < num_measurements; i++) {
-    long time_stamp;
+    int32_t time_stamp;
     rclcpp::Clock system_clock(RCL_SYSTEM_TIME);
     int ret = 0;
-    long system_time_stamp = system_clock.now().nanoseconds();
+    int64_t system_time_stamp = system_clock.now().nanoseconds();
 
     // データ取得時のシステム時刻とLiDAR時刻を取得
     if (measurement_type_ == URG_DISTANCE) {
@@ -972,7 +972,7 @@ rclcpp::Duration UrgNode2::get_time_stamp_offset(size_t num_measurements)
 }
 
 // 指数移動平均による動的補正
-rclcpp::Time UrgNode2::get_synchronized_time(long time_stamp, rclcpp::Time system_time_stamp)
+rclcpp::Time UrgNode2::get_synchronized_time(int32_t time_stamp, rclcpp::Time system_time_stamp)
 {
   rclcpp::Time stamp = system_time_stamp;
 
