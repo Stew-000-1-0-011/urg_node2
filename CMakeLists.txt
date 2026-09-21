@@ -64,6 +64,13 @@ add_library(urg_c SHARED
 # urg_library relies on POSIX/GNU declarations (M_PI, fd_set, ...) that a
 # strict -std=c99 does not expose.
 set_target_properties(urg_c PROPERTIES C_EXTENSIONS ON)
+# urg_utils.c calls usleep() without including <unistd.h>. GCC 14 and later
+# reject an implicit function declaration outright instead of warning, which
+# breaks the build on Lyrical (GCC 15). Upstream urg_library fixed this after
+# the revision this submodule is pinned to, so supply the declaration here.
+if(NOT WIN32 AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(urg_c PRIVATE -include unistd.h)
+endif()
 
 add_library(urg_node2 SHARED src/urg_node2.cpp)
 target_link_libraries(urg_node2 PUBLIC ${URG_NODE2_DEPENDENCIES})
