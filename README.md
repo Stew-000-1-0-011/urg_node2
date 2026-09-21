@@ -30,6 +30,11 @@ Tested models: `UTM-30LX-EW`, `UST-10LX`, `UTM-30LX`, `URG-04LX-UG01`, `UAM-05LP
 
 Tested Environments: `foxy`, `galactic`, `humble`
 
+`kilted` and `lyrical` are supported as build targets: the package and its
+tests have been built against both, but they have not been checked against
+physical hardware. Building on `lyrical` needs CMake 3.16 or later and a
+C++17 compiler.
+
 # License
 `Apache License 2.0`
 The urg_libray C API is licensed under the `Simplified BSD License`.

@@ -30,6 +30,10 @@ LiDARとの通信には[urg_library ver.1.2.5](https://github.com/UrgNetworks/ur
 
 動作確認済み環境：`foxy`, `galactic`
 
+`kilted`と`lyrical`はビルド対象として対応しています。パッケージとテストのビルドは
+確認済みですが、実機での動作確認は行っていません。`lyrical`でのビルドにはCMake 3.16
+以降とC++17対応のコンパイラが必要です。
+
 # ライセンス
 本パッケージのライセンスは`Apache License 2.0`です。  
 urg_libray C言語APIのライセンスは`Simplified BSD License`です。
